@@ -18,10 +18,10 @@ use FOS\RestBundle\View\View;
 use App\Entity\Product;
 
 
-class UserController extends FOSRestController
+class ProductController extends FOSRestController
 {
     /**
-     * @Route("/base.html.twig", name="geo")
+     * @RouteResource("Product")
      */
     public function getAction()
     {
@@ -30,5 +30,5 @@ class UserController extends FOSRestController
             return new View("there are no products exist", Response::HTTP_NOT_FOUND);
         }
         return $restresult;
-    }
+    } // "Get products"   [GET] /users
 }

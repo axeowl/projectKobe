@@ -89,3 +89,5 @@ fos_rest:
         view_response_listener: 'force'
         formats:
             json: true
+    routing_loader:
+            default_format: json
