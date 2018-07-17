@@ -25,7 +25,7 @@ class UserController extends FOSRestController
      */
     public function getAction()
     {
-        $restresult = $this->getDoctrine()->getRepository('AppBundle:Product')->findAll();
+        $restresult = $this->getDoctrine()->getRepository('AppBundle:Product')->getAllProduct();
         if ($restresult === null) {
             return new View("there are no products exist", Response::HTTP_NOT_FOUND);
         }
