@@ -21,7 +21,7 @@ use App\Entity\Product;
 class UserController extends FOSRestController
 {
     /**
-     * @Rest\Get("/product")
+     * @Route("/base.html.twig", name="geo")
      */
     public function getAction()
     {
