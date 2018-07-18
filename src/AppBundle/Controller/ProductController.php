@@ -17,11 +17,10 @@ use Symfony\Component\HttpFoundation\Response;
 use FOS\RestBundle\View\View;
 use App\Entity\Product;
 
-
 class ProductController extends FOSRestController
 {
     /**
-     * @RouteResource("Product")
+     * @Rest\Get("/product")
      */
     public function getAction()
     {
@@ -29,6 +28,6 @@ class ProductController extends FOSRestController
         if ($restresult === null) {
             return new View("there are no products exist", Response::HTTP_NOT_FOUND);
         }
-        return $restresult;
-    } // "Get products"     [GET] /product
+        return View::create($restresult, Response::HTTP_CREATED);
+    } // "Get products"     [GET] /product*/
 }

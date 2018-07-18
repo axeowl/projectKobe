@@ -5,3 +5,4 @@ app:
 products:
     type:     rest
     resource: '@AppBundle/Controller/ProductController'
+    prefix: /api
