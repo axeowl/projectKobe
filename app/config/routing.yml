@@ -4,4 +4,4 @@ app:
 
 products:
     type:     rest
-    resource: '@AppBundle/Controller/ProductController.php'
+    resource: '@AppBundle/Controller/ProductController'
