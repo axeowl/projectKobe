@@ -15,7 +15,7 @@ use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use FOS\RestBundle\View\View;
-use App\Entity\Product;
+use AppBundle\Entity\Product;
 
 class ProductController extends FOSRestController
 {
@@ -24,10 +24,11 @@ class ProductController extends FOSRestController
      */
     public function getAction()
     {
-        $restresult = $this->getDoctrine()->getRepository('AppBundle:Product')->getAllProduct();
-        if ($restresult === null) {
+        $em = $this->getDoctrine()->getManager();
+        $restresult = $em->getRepository(Product::class)->getAllProduct();
+        if ($restresult == null) {
             return new View("there are no products exist", Response::HTTP_NOT_FOUND);
         }
-        return View::create($restresult, Response::HTTP_CREATED);
-    } // "Get products"     [GET] /product*/
+        return $restresult;
+    }
 }

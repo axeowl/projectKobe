@@ -4,5 +4,5 @@ app:
 
 products:
     type:     rest
-    resource: '@AppBundle/Controller/ProductController'
+    resource: '@AppBundle/Controller/ProductController.php'
     prefix: /api
