@@ -30,5 +30,10 @@ class ProductController extends FOSRestController
             return new View("there are no products exist", Response::HTTP_NOT_FOUND);
         }
         return $restresult;
+
+        /*$repository = $this->getDoctrine()->getRepository(Product::class);
+        $query = $repository->createQueryBuilder('p')->getQuery();
+        $products = $query->getResult();
+        return $products;*/
     }
 }

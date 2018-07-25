@@ -9,13 +9,14 @@
 namespace AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use AppBundle\Entity\User;
 
 class ProductRepository extends EntityRepository
 {
-    public function getAllProduct()
+    public function findAll()
     {
         $conn = $this->getEntityManager()->getConnection();
-        $sql = "SELECT * from product";
+        $sql = "SELECT * from User";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll();
