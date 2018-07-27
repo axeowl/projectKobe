@@ -20,4 +20,12 @@ class ProductRepository extends EntityRepository
         $stmt->execute();
         return $stmt->fetchAll();
     }
+
+    public function deleteProduct($id)
+    {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = "DELETE from product WHERE idProduct = $id";
+        $stmt = $conn->prepare($sql);
+        return $stmt->execute();
+    }
 }

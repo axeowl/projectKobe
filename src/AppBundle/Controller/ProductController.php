@@ -20,9 +20,9 @@ use AppBundle\Entity\Product;
 class ProductController extends FOSRestController
 {
     /**
-     * @Rest\Get("/product")
+     * @Rest\Get("/getproduct")
      */
-    public function getAction()
+    public function getAllAction()
     {
         $em = $this->getDoctrine()->getManager();
         $restresult = $em->getRepository(Product::class)->getAllProduct();
@@ -30,10 +30,17 @@ class ProductController extends FOSRestController
             return new View("there are no products exist", Response::HTTP_NOT_FOUND);
         }
         return $restresult;
+    }
 
-        /*$repository = $this->getDoctrine()->getRepository(Product::class);
-        $query = $repository->createQueryBuilder('p')->getQuery();
-        $products = $query->getResult();
-        return $products;*/
+    /**
+     * @Rest\Get("/deleteproduct{id}")
+     */
+    public function deleteAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $restresult = $em->getRepository(Product::class)->deleteProduct($id);
+        if($restresult)
+            return true;
+        return false;
     }
 }
