@@ -11,14 +11,13 @@ namespace AppBundle\Repository;
 use Doctrine\ORM\EntityRepository;
 use AppBundle\Entity\User;
 
-class ProductRepository extends EntityRepository
+class UserRepository extends EntityRepository
 {
-    public function findAll()
+    public function registerNewUser($email, $username, $password)
     {
         $conn = $this->getEntityManager()->getConnection();
-        $sql = "SELECT * from User";
+        $sql = "INSERT INTO user (email, username, password) VALUES ('$email', '$username', '$password')";
         $stmt = $conn->prepare($sql);
-        $stmt->execute();
-        return $stmt->fetchAll();
+        return $stmt->execute();
     }
 }
