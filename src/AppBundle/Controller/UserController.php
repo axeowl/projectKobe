@@ -30,4 +30,18 @@ class UserController extends FOSRestController
         }*/
         return $restresult;
     }
+
+    /**
+     * @Rest\Get("/login{email}/{password}")
+     */
+
+    public function loginAction($email, $password)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $restresult = $em->getRepository(User::class)->validateUser($email, $password);
+        /*if ($restresult == null) {
+            return new View("there are no products exist", Response::HTTP_NOT_FOUND);
+        }*/
+        return $restresult;
+    }
 }

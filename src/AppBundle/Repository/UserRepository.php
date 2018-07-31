@@ -20,4 +20,13 @@ class UserRepository extends EntityRepository
         $stmt = $conn->prepare($sql);
         return $stmt->execute();
     }
+
+    public function validateUser($email, $password)
+    {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = "SELECT * FROM user WHERE email = '$email' AND password = '$password'";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetch();
+    }
 }
