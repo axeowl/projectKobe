@@ -1,14 +1,14 @@
 <?php
 
-namespace AppBundle\Entity;
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Product
  *
- * @ORM\Table(name="product")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\ProductRepository")
+ * @ORM\Table(name="product", indexes={@ORM\Index(name="fk_product_category1_idx", columns={"category_idCategory"})})
+ * @ORM\Entity
  */
 class Product
 {
@@ -38,9 +38,19 @@ class Product
     /**
      * @var string
      *
-     * @ORM\Column(name="path", type="string", length=500, nullable=false)
+     * @ORM\Column(name="path", type="string", length=500, nullable=true)
      */
     private $path;
+
+    /**
+     * @var \Category
+     *
+     * @ORM\ManyToOne(targetEntity="Category")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="category_idCategory", referencedColumnName="idCategory")
+     * })
+     */
+    private $categorycategory;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -57,120 +67,5 @@ class Product
         $this->useruser = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
-
-    /**
-     * Get idproduct
-     *
-     * @return integer
-     */
-    public function getIdproduct()
-    {
-        return $this->idproduct;
-    }
-
-    /**
-     * Set productname
-     *
-     * @param string $productname
-     *
-     * @return Product
-     */
-    public function setProductname($productname)
-    {
-        $this->productname = $productname;
-
-        return $this;
-    }
-
-    /**
-     * Get productname
-     *
-     * @return string
-     */
-    public function getProductname()
-    {
-        return $this->productname;
-    }
-
-    /**
-     * Set purchased
-     *
-     * @param boolean $purchased
-     *
-     * @return Product
-     */
-    public function setPurchased($purchased)
-    {
-        $this->purchased = $purchased;
-
-        return $this;
-    }
-
-    /**
-     * Get purchased
-     *
-     * @return boolean
-     */
-    public function getPurchased()
-    {
-        return $this->purchased;
-    }
-
-    /**
-     * Set path
-     *
-     * @param string $path
-     *
-     * @return Product
-     */
-    public function setPath($path)
-    {
-        $this->path = $path;
-
-        return $this;
-    }
-
-    /**
-     * Get path
-     *
-     * @return string
-     */
-    public function getPath()
-    {
-        return $this->path;
-    }
-
-    /**
-     * Add useruser
-     *
-     * @param \AppBundle\Entity\User $useruser
-     *
-     * @return Product
-     */
-    public function addUseruser(\AppBundle\Entity\User $useruser)
-    {
-        $this->useruser[] = $useruser;
-
-        return $this;
-    }
-
-    /**
-     * Remove useruser
-     *
-     * @param \AppBundle\Entity\User $useruser
-     */
-    public function removeUseruser(\AppBundle\Entity\User $useruser)
-    {
-        $this->useruser->removeElement($useruser);
-    }
-
-    /**
-     * Get useruser
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getUseruser()
-    {
-        return $this->useruser;
-    }
 }
+

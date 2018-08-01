@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Entity;
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * User
  *
  * @ORM\Table(name="user")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
+ * @ORM\Entity
  */
 class User
 {
@@ -65,120 +65,5 @@ class User
         $this->productproduct = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
-
-    /**
-     * Get iduser
-     *
-     * @return integer
-     */
-    public function getIduser()
-    {
-        return $this->iduser;
-    }
-
-    /**
-     * Set email
-     *
-     * @param string $email
-     *
-     * @return User
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    /**
-     * Get email
-     *
-     * @return string
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    /**
-     * Set username
-     *
-     * @param string $username
-     *
-     * @return User
-     */
-    public function setUsername($username)
-    {
-        $this->username = $username;
-
-        return $this;
-    }
-
-    /**
-     * Get username
-     *
-     * @return string
-     */
-    public function getUsername()
-    {
-        return $this->username;
-    }
-
-    /**
-     * Set password
-     *
-     * @param string $password
-     *
-     * @return User
-     */
-    public function setPassword($password)
-    {
-        $this->password = $password;
-
-        return $this;
-    }
-
-    /**
-     * Get password
-     *
-     * @return string
-     */
-    public function getPassword()
-    {
-        return $this->password;
-    }
-
-    /**
-     * Add productproduct
-     *
-     * @param \AppBundle\Entity\Product $productproduct
-     *
-     * @return User
-     */
-    public function addProductproduct(\AppBundle\Entity\Product $productproduct)
-    {
-        $this->productproduct[] = $productproduct;
-
-        return $this;
-    }
-
-    /**
-     * Remove productproduct
-     *
-     * @param \AppBundle\Entity\Product $productproduct
-     */
-    public function removeProductproduct(\AppBundle\Entity\Product $productproduct)
-    {
-        $this->productproduct->removeElement($productproduct);
-    }
-
-    /**
-     * Get productproduct
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getProductproduct()
-    {
-        return $this->productproduct;
-    }
 }
+
