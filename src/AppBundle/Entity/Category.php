@@ -29,5 +29,38 @@ class Category
     private $categoryname;
 
 
-}
 
+    /**
+     * Get idcategory
+     *
+     * @return integer
+     */
+    public function getIdcategory()
+    {
+        return $this->idcategory;
+    }
+
+    /**
+     * Set categoryname
+     *
+     * @param string $categoryname
+     *
+     * @return Category
+     */
+    public function setCategoryname($categoryname)
+    {
+        $this->categoryname = $categoryname;
+
+        return $this;
+    }
+
+    /**
+     * Get categoryname
+     *
+     * @return string
+     */
+    public function getCategoryname()
+    {
+        return $this->categoryname;
+    }
+}
