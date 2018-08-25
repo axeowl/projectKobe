@@ -32,7 +32,7 @@ class ProductRepository extends EntityRepository
     public function addProduct($productname, $category)
     {
         $conn = $this->getEntityManager()->getConnection();
-        $sql = "DELETE INTO product (idProduct, productName, purchased, path, category_idCategory) VALUES ($productname, 0, 'https://www.dropbox.com/s/peanuwuu9cg8eq7/pasta.png?dl=1', $category)";
+        $sql = "INSERT INTO product (idProduct, productName, purchased, path, category_idCategory) VALUES (DEFAULT, '$productname', 0, 'https://www.dropbox.com/s/peanuwuu9cg8eq7/pasta.png?dl=1', $category)";
         $stmt = $conn->prepare($sql);
         return $stmt->execute();
     }
