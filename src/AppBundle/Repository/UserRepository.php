@@ -29,4 +29,13 @@ class UserRepository extends EntityRepository
         $stmt->execute();
         return $stmt->fetch();
     }
+
+    public function getUserInfo($email)
+    {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = "SELECT * FROM user WHERE email = '$email'";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetch();
+    }
 }
