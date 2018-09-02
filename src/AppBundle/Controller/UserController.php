@@ -49,7 +49,7 @@ class UserController extends FOSRestController
      * @Rest\Get("/userinfo{email}")
      */
 
-    public function getUserInfo($email, $password)
+    public function getUserInfo($email)
     {
         $em = $this->getDoctrine()->getManager();
         $restresult = $em->getRepository(User::class)->getUserInfo($email);
