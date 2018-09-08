@@ -37,7 +37,6 @@ class ProductController extends FOSRestController
      */
     public function deleteAction($id)
     {
-        $ciao = null;
         $em = $this->getDoctrine()->getManager();
         $restresult = $em->getRepository(Product::class)->deleteProduct($id);
         if($restresult)
