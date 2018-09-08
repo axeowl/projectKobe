@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="App\\Entity\User" table="user">
+    <id name="iduser" type="integer" column="iduser">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="email" type="string" column="email" length="200" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="username" type="string" column="username" length="45" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="password" type="string" column="password" length="100" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="isconnected" type="boolean" column="isConnected" nullable="false"/>
+    <many-to-many field="productproduct" target-entity="Product" inversed-by="useruser" fetch="LAZY">
+      <join-table name="user_has_product">
+        <join-columns>
+          <join-column name="user_iduser" referenced-column-name="iduser"/>
+        </join-columns>
+        <inverse-join-columns>
+          <join-column name="product_idproduct" referenced-column-name="idproduct"/>
+        </inverse-join-columns>
+      </join-table>
+    </many-to-many>
+  </entity>
+</doctrine-mapping>
