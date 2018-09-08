@@ -27,6 +27,7 @@ class ProductRepository extends EntityRepository
         $sql = "DELETE from product WHERE idproduct = $id";
         $stmt = $conn->prepare($sql);
         return $stmt->execute();
+        
     }
 
     public function addProduct($productname, $category)
