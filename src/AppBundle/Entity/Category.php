@@ -15,7 +15,7 @@ class Category
     /**
      * @var integer
      *
-     * @ORM\Column(name="idCategory", type="integer", nullable=false)
+     * @ORM\Column(name="idcategory", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -24,43 +24,27 @@ class Category
     /**
      * @var string
      *
-     * @ORM\Column(name="categoryName", type="string", length=45, nullable=false)
+     * @ORM\Column(name="categoryname", type="string", length=45, nullable=false)
      */
     private $categoryname;
 
-
-
-    /**
-     * Get idcategory
-     *
-     * @return integer
-     */
     public function getIdcategory()
     {
         return $this->idcategory;
     }
 
-    /**
-     * Set categoryname
-     *
-     * @param string $categoryname
-     *
-     * @return Category
-     */
-    public function setCategoryname($categoryname)
+    public function getCategoryname()
+    {
+        return $this->categoryname;
+    }
+
+    public function setCategoryname(string $categoryname)
     {
         $this->categoryname = $categoryname;
 
         return $this;
     }
 
-    /**
-     * Get categoryname
-     *
-     * @return string
-     */
-    public function getCategoryname()
-    {
-        return $this->categoryname;
-    }
+
 }
+

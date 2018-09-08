@@ -2,52 +2,56 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Product
  *
- * @ORM\Table(name="product", indexes={@ORM\Index(name="fk_product_category1_idx", columns={"category_idCategory"})})
- * @ORM\Entity(repositoryClass="AppBundle\Repository\ProductRepository")
+ * @ORM\Table(name="product", indexes={@ORM\Index(name="fk_product_category1_idx", columns={"category_idcategory"})})
+ * @ORM\Entity
  */
 class Product
 {
     /**
      * @var integer
      *
-     * @ORM\Column(name="idProduct", type="integer", nullable=false)
+     * @ORM\Column(name="idproduct", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue(strategy="NONE")
      */
     private $idproduct;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="productName", type="string", length=100, nullable=false)
+     * @ORM\Column(name="productname", type="string", length=45, nullable=false)
      */
     private $productname;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="purchased", type="boolean", nullable=true)
+     * @ORM\Column(name="purchased", type="boolean", nullable=false)
      */
-    private $purchased;
+    private $purchased = '0';
 
     /**
      * @var string
      *
-     * @ORM\Column(name="path", type="string", length=500, nullable=true)
+     * @ORM\Column(name="path", type="string", length=500, nullable=false)
      */
     private $path;
 
     /**
      * @var \Category
      *
-     * @ORM\ManyToOne(targetEntity="Category")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\OneToOne(targetEntity="Category")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="category_idCategory", referencedColumnName="idCategory")
+     *   @ORM\JoinColumn(name="category_idcategory", referencedColumnName="idcategory")
      * })
      */
     private $categorycategory;
@@ -67,97 +71,53 @@ class Product
         $this->useruser = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
-
-    /**
-     * Get idproduct
-     *
-     * @return integer
-     */
     public function getIdproduct()
     {
         return $this->idproduct;
     }
 
-    /**
-     * Set productname
-     *
-     * @param string $productname
-     *
-     * @return Product
-     */
-    public function setProductname($productname)
+    public function getProductname()
+    {
+        return $this->productname;
+    }
+
+    public function setProductname(string $productname)
     {
         $this->productname = $productname;
 
         return $this;
     }
 
-    /**
-     * Get productname
-     *
-     * @return string
-     */
-    public function getProductname()
+    public function getPurchased()
     {
-        return $this->productname;
+        return $this->purchased;
     }
 
-    /**
-     * Set purchased
-     *
-     * @param boolean $purchased
-     *
-     * @return Product
-     */
-    public function setPurchased($purchased)
+    public function setPurchased(bool $purchased)
     {
         $this->purchased = $purchased;
 
         return $this;
     }
 
-    /**
-     * Get purchased
-     *
-     * @return boolean
-     */
-    public function getPurchased()
+    public function getPath()
     {
-        return $this->purchased;
+        return $this->path;
     }
 
-    /**
-     * Set path
-     *
-     * @param string $path
-     *
-     * @return Product
-     */
-    public function setPath($path)
+    public function setPath(string $path)
     {
         $this->path = $path;
 
         return $this;
     }
 
-    /**
-     * Get path
-     *
-     * @return string
-     */
-    public function getPath()
+    public function getCategorycategory()
     {
-        return $this->path;
+        return $this->categorycategory;
     }
 
-    /**
-     * Set categorycategory
-     *
-     * @param \AppBundle\Entity\Category $categorycategory
-     *
-     * @return Product
-     */
-    public function setCategorycategory(\AppBundle\Entity\Category $categorycategory = null)
+    public function setCategorycategory(Category $categorycategory)
     {
         $this->categorycategory = $categorycategory;
 
@@ -165,46 +125,32 @@ class Product
     }
 
     /**
-     * Get categorycategory
-     *
-     * @return \AppBundle\Entity\Category
-     */
-    public function getCategorycategory()
-    {
-        return $this->categorycategory;
-    }
-
-    /**
-     * Add useruser
-     *
-     * @param \AppBundle\Entity\User $useruser
-     *
-     * @return Product
-     */
-    public function addUseruser(\AppBundle\Entity\User $useruser)
-    {
-        $this->useruser[] = $useruser;
-
-        return $this;
-    }
-
-    /**
-     * Remove useruser
-     *
-     * @param \AppBundle\Entity\User $useruser
-     */
-    public function removeUseruser(\AppBundle\Entity\User $useruser)
-    {
-        $this->useruser->removeElement($useruser);
-    }
-
-    /**
-     * Get useruser
-     *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Collection|User[]
      */
     public function getUseruser()
     {
         return $this->useruser;
     }
+
+    public function addUseruser(User $useruser)
+    {
+        if (!$this->useruser->contains($useruser)) {
+            $this->useruser[] = $useruser;
+            $useruser->addProductproduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUseruser(User $useruser)
+    {
+        if ($this->useruser->contains($useruser)) {
+            $this->useruser->removeElement($useruser);
+            $useruser->removeProductproduct($this);
+        }
+
+        return $this;
+    }
+
 }
+

@@ -2,20 +2,22 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * User
  *
  * @ORM\Table(name="user")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
+ * @ORM\Entity
  */
 class User
 {
     /**
      * @var integer
      *
-     * @ORM\Column(name="idUser", type="integer", nullable=false)
+     * @ORM\Column(name="iduser", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -24,23 +26,30 @@ class User
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=100, nullable=false)
+     * @ORM\Column(name="email", type="string", length=200, nullable=false)
      */
     private $email;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="username", type="string", length=100, nullable=false)
+     * @ORM\Column(name="username", type="string", length=45, nullable=false)
      */
     private $username;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="password", type="string", length=250, nullable=false)
+     * @ORM\Column(name="password", type="string", length=100, nullable=false)
      */
     private $password;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="isConnected", type="boolean", nullable=false)
+     */
+    private $isconnected;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -48,10 +57,10 @@ class User
      * @ORM\ManyToMany(targetEntity="Product", inversedBy="useruser")
      * @ORM\JoinTable(name="user_has_product",
      *   joinColumns={
-     *     @ORM\JoinColumn(name="User_idUser", referencedColumnName="idUser")
+     *     @ORM\JoinColumn(name="user_iduser", referencedColumnName="iduser")
      *   },
      *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="Product_idProduct", referencedColumnName="idProduct")
+     *     @ORM\JoinColumn(name="product_idproduct", referencedColumnName="idproduct")
      *   }
      * )
      */
@@ -65,120 +74,84 @@ class User
         $this->productproduct = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
-
-    /**
-     * Get iduser
-     *
-     * @return integer
-     */
-    public function getIduser()
+    public function getIduser(): ?int
     {
         return $this->iduser;
     }
 
-    /**
-     * Set email
-     *
-     * @param string $email
-     *
-     * @return User
-     */
-    public function setEmail($email)
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): self
     {
         $this->email = $email;
 
         return $this;
     }
 
-    /**
-     * Get email
-     *
-     * @return string
-     */
-    public function getEmail()
+    public function getUsername(): ?string
     {
-        return $this->email;
+        return $this->username;
     }
 
-    /**
-     * Set username
-     *
-     * @param string $username
-     *
-     * @return User
-     */
-    public function setUsername($username)
+    public function setUsername(string $username): self
     {
         $this->username = $username;
 
         return $this;
     }
 
-    /**
-     * Get username
-     *
-     * @return string
-     */
-    public function getUsername()
+    public function getPassword(): ?string
     {
-        return $this->username;
+        return $this->password;
     }
 
-    /**
-     * Set password
-     *
-     * @param string $password
-     *
-     * @return User
-     */
-    public function setPassword($password)
+    public function setPassword(string $password): self
     {
         $this->password = $password;
 
         return $this;
     }
 
-    /**
-     * Get password
-     *
-     * @return string
-     */
-    public function getPassword()
+    public function getIsconnected(): ?bool
     {
-        return $this->password;
+        return $this->isconnected;
     }
 
-    /**
-     * Add productproduct
-     *
-     * @param \AppBundle\Entity\Product $productproduct
-     *
-     * @return User
-     */
-    public function addProductproduct(\AppBundle\Entity\Product $productproduct)
+    public function setIsconnected(bool $isconnected): self
     {
-        $this->productproduct[] = $productproduct;
+        $this->isconnected = $isconnected;
 
         return $this;
     }
 
     /**
-     * Remove productproduct
-     *
-     * @param \AppBundle\Entity\Product $productproduct
+     * @return Collection|Product[]
      */
-    public function removeProductproduct(\AppBundle\Entity\Product $productproduct)
-    {
-        $this->productproduct->removeElement($productproduct);
-    }
-
-    /**
-     * Get productproduct
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getProductproduct()
+    public function getProductproduct(): Collection
     {
         return $this->productproduct;
     }
+
+    public function addProductproduct(Product $productproduct): self
+    {
+        if (!$this->productproduct->contains($productproduct)) {
+            $this->productproduct[] = $productproduct;
+        }
+
+        return $this;
+    }
+
+    public function removeProductproduct(Product $productproduct): self
+    {
+        if ($this->productproduct->contains($productproduct)) {
+            $this->productproduct->removeElement($productproduct);
+        }
+
+        return $this;
+    }
+
 }
+
