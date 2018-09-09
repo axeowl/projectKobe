@@ -16,7 +16,7 @@ class UserRepository extends EntityRepository
     public function registerNewUser($email, $username, $password)
     {
         $conn = $this->getEntityManager()->getConnection();
-        $sql = "INSERT INTO user (email, username, password, isConnected) VALUES ('$email', '$username', '$password', 'false')";
+        $sql = "INSERT INTO user (email, username, password, isConnected) VALUES ('$email', '$username', '$password', 0)";
         $stmt = $conn->prepare($sql);
         return $stmt->execute();
     }
