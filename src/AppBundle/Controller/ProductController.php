@@ -45,12 +45,12 @@ class ProductController extends FOSRestController
     }
 
     /**
-     * @Rest\Get("/addproduct{productname}/{category}")
+     * @Rest\Get("/addproduct{productname}/{category}/{userid}")
      */
-    public function addAction($productname, $category)
+    public function addAction($productname, $category, $userid)
     {
         $em = $this->getDoctrine()->getManager();
-        $restresult = $em->getRepository(Product::class)->addProduct($productname, $category);
+        $restresult = $em->getRepository(Product::class)->addProduct($productname, $category, $userid);
         if($restresult)
             return true;
         return false;

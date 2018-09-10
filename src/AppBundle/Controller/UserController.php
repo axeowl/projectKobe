@@ -58,4 +58,32 @@ class UserController extends FOSRestController
         }*/
         return $restresult;
     }
+
+    /**
+     * @Rest\Get("/synchronize{id}")
+     */
+
+    public function synchronize($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $restresult = $em->getRepository(User::class)->synchronize($id);
+        /*if ($restresult == null) {
+            return new View("there are no products exist", Response::HTTP_NOT_FOUND);
+        }*/
+        return $restresult;
+    }
+
+    /**
+     * @Rest\Get("/issynchronized{email}")
+     */
+
+    public function isSynchronized($email)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $restresult = $em->getRepository(User::class)->isSynchronized($email);
+        /*if ($restresult == null) {
+            return new View("there are no products exist", Response::HTTP_NOT_FOUND);
+        }*/
+        return $restresult;
+    }
 }

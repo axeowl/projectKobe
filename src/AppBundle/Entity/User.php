@@ -44,9 +44,9 @@ class User
     private $password;
 
     /**
-     * @var boolean
+     * @var string
      *
-     * @ORM\Column(name="isConnected", type="boolean", nullable=false)
+     * @ORM\Column(name="isConnected", type="string", length=25, nullable=false)
      */
     private $isconnected;
 
@@ -73,53 +73,53 @@ class User
         $this->productproduct = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
-    public function getIduser(): ?int
+    public function getIduser()
     {
         return $this->iduser;
     }
 
-    public function getEmail(): ?string
+    public function getEmail()
     {
         return $this->email;
     }
 
-    public function setEmail(string $email): self
+    public function setEmail(string $email)
     {
         $this->email = $email;
 
         return $this;
     }
 
-    public function getUsername(): ?string
+    public function getUsername()
     {
         return $this->username;
     }
 
-    public function setUsername(string $username): self
+    public function setUsername(string $username)
     {
         $this->username = $username;
 
         return $this;
     }
 
-    public function getPassword(): ?string
+    public function getPassword()
     {
         return $this->password;
     }
 
-    public function setPassword(string $password): self
+    public function setPassword(string $password)
     {
         $this->password = $password;
 
         return $this;
     }
 
-    public function getIsconnected(): ?bool
+    public function getIsconnected()
     {
         return $this->isconnected;
     }
 
-    public function setIsconnected(bool $isconnected): self
+    public function setIsconnected(string $isconnected)
     {
         $this->isconnected = $isconnected;
 
@@ -129,12 +129,12 @@ class User
     /**
      * @return Collection|Product[]
      */
-    public function getProductproduct(): Collection
+    public function getProductproduct()
     {
         return $this->productproduct;
     }
 
-    public function addProductproduct(Product $productproduct): self
+    public function addProductproduct(Product $productproduct)
     {
         if (!$this->productproduct->contains($productproduct)) {
             $this->productproduct[] = $productproduct;
@@ -143,7 +143,7 @@ class User
         return $this;
     }
 
-    public function removeProductproduct(Product $productproduct): self
+    public function removeProductproduct(Product $productproduct)
     {
         if ($this->productproduct->contains($productproduct)) {
             $this->productproduct->removeElement($productproduct);
