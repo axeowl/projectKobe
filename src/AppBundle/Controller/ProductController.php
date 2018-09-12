@@ -20,12 +20,12 @@ use AppBundle\Entity\Product;
 class ProductController extends FOSRestController
 {
     /**
-     * @Rest\Get("/getproduct")
+     * @Rest\Get("/getproduct{id}")
      */
-    public function getAllAction()
+    public function getAllAction($id)
     {
         $em = $this->getDoctrine()->getManager();
-        $restresult = $em->getRepository(Product::class)->getAllProduct();
+        $restresult = $em->getRepository(Product::class)->getAllProduct($id);
         if ($restresult == null) {
             return new View("there are no products exist", Response::HTTP_NOT_FOUND);
         }
