@@ -62,7 +62,7 @@ class ProductRepository extends EntityRepository
     public function addProduct($productname, $category, $userid)
     {
         $conn = $this->getEntityManager()->getConnection();
-        $sql = "INSERT INTO product (idproduct, productname, purchased, path, category_idcategory) VALUES (DEFAULT, '$productname', 0, $this->categoryArray, $category)";
+        $sql = "INSERT INTO product (idproduct, productname, purchased, path, category_idcategory) VALUES (DEFAULT, '$productname', 0, $this->categoryArray[$category], $category)";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         $sql = "INSERT INTO user_has_product (user_iduser, product_idproduct) VALUES (".$userid.",".$conn->lastInsertId().")";
