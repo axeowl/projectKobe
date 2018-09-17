@@ -30,5 +30,6 @@ class MarketController extends FOSRestController
             return new View("there are no products exist", Response::HTTP_NOT_FOUND);
         }
         return $restresult;
+        
     }
 }
