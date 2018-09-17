@@ -8,13 +8,14 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Product
- * @ORM\Entity(repositoryClass="AppBundle\Repository\ProductRepository")
+ *
  * @ORM\Table(name="product", indexes={@ORM\Index(name="fk_product_category1_idx", columns={"category_idcategory"})})
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\ProductRepository")
  */
 class Product
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="idproduct", type="integer", nullable=false)
      * @ORM\Id
@@ -30,7 +31,7 @@ class Product
     private $productname;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(name="purchased", type="boolean", nullable=false)
      */
@@ -152,4 +153,3 @@ class Product
     }
 
 }
-

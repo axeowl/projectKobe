@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Category
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="idcategory", type="integer", nullable=false)
      * @ORM\Id
@@ -47,4 +47,3 @@ class Category
 
 
 }
-

@@ -8,13 +8,14 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * User
- *@ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
+ *
  * @ORM\Table(name="user")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
  */
 class User
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="iduser", type="integer", nullable=false)
      * @ORM\Id
@@ -153,4 +154,3 @@ class User
     }
 
 }
-
