@@ -74,6 +74,20 @@ class UserController extends FOSRestController
     }
 
     /**
+     * @Rest\Get("/desynchronize{id}")
+     */
+
+    public function desynchronize($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $restresult = $em->getRepository(User::class)->desynchronize($id);
+        /*if ($restresult == null) {
+            return new View("there are no products exist", Response::HTTP_NOT_FOUND);
+        }*/
+        return $restresult;
+    }
+
+    /**
      * @Rest\Get("/issynchronized{email}")
      */
 

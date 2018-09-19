@@ -48,6 +48,15 @@ class UserRepository extends EntityRepository
         return;
     }
 
+    public function desynchronize($id)
+    {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = "UPDATE user SET isConnected = 0 WHERE iduser = '".$id."'";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        return;
+    }
+
     public function isSynchronized($email)
     {
         $conn = $this->getEntityManager()->getConnection();
