@@ -42,7 +42,7 @@ class ProductRepository extends EntityRepository
     public function getAllProduct($id)
     {
         $conn = $this->getEntityManager()->getConnection();
-        $sql = "SELECT DISTINCT * from product, user, user_has_product WHERE user_has_product.user_iduser = user.iduser AND user_has_product.product_idproduct = product.idproduct AND user.iduser = $id ORDER BY = product.productName";
+        $sql = "SELECT * from product, user, user_has_product WHERE user_has_product.user_iduser = user.iduser AND user_has_product.product_idproduct = product.idproduct AND user.iduser = $id GROUP BY = product.productName";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll();
