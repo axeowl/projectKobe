@@ -49,10 +49,30 @@ class ProductController extends FOSRestController
      */
     public function addAction($productname, $category, $userid)
     {
-        $em = $this->getDoctrine()->getManager();
-        $restresult = $em->getRepository(Product::class)->addProduct($productname, $category, $userid);
-        if($restresult)
-            return true;
+        $res = $this->getAllAction($userid);
+        try
+        {
+
+            for($i = 0; $i<sizeof($res);$i++)
+            {
+                if ($res[$i]['productname'] == $productname)
+                {
+                    return false;
+                }
+            }
+            $em = $this->getDoctrine()->getManager();
+            $restresult = $em->getRepository(Product::class)->addProduct($productname, $category, $userid);
+            if($restresult)
+                return true;
+        }
+        catch(\Exception $e)
+        {
+            $em = $this->getDoctrine()->getManager();
+            $restresult = $em->getRepository(Product::class)->addProduct($productname, $category, $userid);
+            if($restresult)
+                return true;
+            return false;
+        }
         return false;
     }
 }
