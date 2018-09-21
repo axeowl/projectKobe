@@ -49,7 +49,7 @@ class ProductController extends FOSRestController
      */
     public function addAction($productname, $category, $userid)
     {
-        $res = $this->getAllAction($userid);
+        /*$res = $this->getAllAction($userid);
         try
         {
 
@@ -66,13 +66,13 @@ class ProductController extends FOSRestController
                 return true;
         }
         catch(\Exception $e)
-        {
+        {*/
             $em = $this->getDoctrine()->getManager();
             $restresult = $em->getRepository(Product::class)->addProduct($productname, $category, $userid);
             if($restresult)
                 return true;
             return false;
-        }
-        return false;
+        //}
+        //return false;
     }
 }
