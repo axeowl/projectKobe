@@ -49,30 +49,31 @@ class ProductController extends FOSRestController
      */
     public function addAction($productname, $category, $userid)
     {
-        /*$res = $this->getAllAction($userid);
-        try
+        $res = $this->getAllAction($userid);
+        if (strcmp(json_encode($res),"there are no products exist"))
         {
-
-            for($i = 0; $i<sizeof($res);$i++)
-            {
-                if ($res[$i]['productname'] == $productname)
-                {
-                    return false;
-                }
-            }
-            $em = $this->getDoctrine()->getManager();
-            $restresult = $em->getRepository(Product::class)->addProduct($productname, $category, $userid);
-            if($restresult)
-                return true;
+            $res = null;
         }
-        catch(\Exception $e)
-        {*/
+        if (empty($res))
+        {
             $em = $this->getDoctrine()->getManager();
             $restresult = $em->getRepository(Product::class)->addProduct($productname, $category, $userid);
             if($restresult)
                 return true;
             return false;
-        //}
-        //return false;
+        }
+        for($i = 0; $i<sizeof($res);$i++)
+        {
+            if ($res[$i]['productname'] == $productname)
+            {
+                return false;
+            }
+        }
+        $em = $this->getDoctrine()->getManager();
+        $restresult = $em->getRepository(Product::class)->addProduct($productname, $category, $userid);
+        if($restresult)
+            return true;
+        return false;
+        
     }
 }
