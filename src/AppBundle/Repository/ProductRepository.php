@@ -42,7 +42,7 @@ class ProductRepository extends EntityRepository
     public function getAllProduct($id)
     {
         $conn = $this->getEntityManager()->getConnection();
-        $sql = "SELECT * from product, user, user_has_product WHERE user_has_product.user_iduser = user.iduser AND user_has_product.product_idproduct = product.idproduct AND user.iduser = $id GROUP BY product.productName";
+        $sql = "SELECT * from product, user, user_has_product WHERE user_has_product.user_iduser = user.iduser AND user_has_product.product_idproduct = product.idproduct AND user.iduser = $id AND product.purchased = 0 GROUP BY product.productName";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll();
@@ -52,6 +52,19 @@ class ProductRepository extends EntityRepository
     {
         $conn = $this->getEntityManager()->getConnection();
         $sql = "DELETE from user_has_product WHERE product_idproduct = $id";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        $sql = "DELETE from product WHERE idproduct = $id";
+        $stmt = $conn->prepare($sql);
+        return $stmt->execute();
+    }
+
+
+
+    public function purchaseProduct($id)
+    {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = "UPDATE product SET purchased = 1 WHERE idproduct = $id;";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         $sql = "DELETE from product WHERE idproduct = $id";

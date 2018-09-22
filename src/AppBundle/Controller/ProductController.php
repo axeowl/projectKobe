@@ -44,6 +44,18 @@ class ProductController extends FOSRestController
         return false;
     }
 
+
+    /**
+     * @Rest\Get("/purchaseproduct{id}")
+     */
+    public function purchaseAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $restresult = $em->getRepository(Product::class)->purchaseProduct($id);
+        if($restresult)
+            return true;
+        return false;
+    }
     /**
      * @Rest\Get("/addproduct{productname}/{category}/{userid}")
      */
@@ -74,6 +86,6 @@ class ProductController extends FOSRestController
         if($restresult)
             return true;
         return false;
-        
+
     }
 }
