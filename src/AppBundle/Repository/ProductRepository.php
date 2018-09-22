@@ -68,7 +68,14 @@ class ProductRepository extends EntityRepository
         return $stmt->execute();
     }
 
+    public function reinsertProduct($id)
+    {
 
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = "UPDATE product SET purchased = 0 WHERE idproduct = $id;";
+        $stmt = $conn->prepare($sql);
+        return $stmt->execute();
+    }
 
     public function purchaseProduct($id)
     {

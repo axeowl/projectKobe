@@ -57,6 +57,18 @@ class ProductController extends FOSRestController
         return false;
     }
 
+    /**
+     * @Rest\Get("/reinsertproduct{id}")
+     */
+    public function reinsertAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $restresult = $em->getRepository(Product::class)->reinsertProduct($id);
+        if($restresult)
+            return true;
+        return false;
+    }
+
 
     /**
      * @Rest\Get("/purchaseproduct{id}")
