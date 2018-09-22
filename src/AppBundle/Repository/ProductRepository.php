@@ -66,9 +66,6 @@ class ProductRepository extends EntityRepository
         $conn = $this->getEntityManager()->getConnection();
         $sql = "UPDATE product SET purchased = 1 WHERE idproduct = $id;";
         $stmt = $conn->prepare($sql);
-        $stmt->execute();
-        $sql = "DELETE from product WHERE idproduct = $id";
-        $stmt = $conn->prepare($sql);
         return $stmt->execute();
     }
 
