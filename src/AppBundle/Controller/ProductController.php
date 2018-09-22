@@ -33,6 +33,19 @@ class ProductController extends FOSRestController
     }
 
     /**
+     * @Rest\Get("/getpurchasedproduct{id}")
+     */
+    public function getAllPurchasedAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $restresult = $em->getRepository(Product::class)->getAllPurchasedProduct($id);
+        if ($restresult == null) {
+            return new View("there are no products exist", Response::HTTP_NOT_FOUND);
+        }
+        return $restresult;
+    }
+
+    /**
      * @Rest\Get("/deleteproduct{id}")
      */
     public function deleteAction($id)
