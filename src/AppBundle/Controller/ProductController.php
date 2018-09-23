@@ -87,7 +87,7 @@ class ProductController extends FOSRestController
     public function addAction($productname, $category, $userid)
     {
         $res = $this->getAllAction($userid);
-        if (strcmp(json_encode($res),"there are no products exist"))
+        if (strcmp(json_encode($res),"there are no products exist") == 0)
         {
             $res = null;
         }
