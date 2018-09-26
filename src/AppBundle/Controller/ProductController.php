@@ -27,7 +27,7 @@ class ProductController extends FOSRestController
         $em = $this->getDoctrine()->getManager();
         $restresult = $em->getRepository(Product::class)->getAllProduct($id);
         if ($restresult == null) {
-            return new View("there are no products exist", Response::HTTP_NOT_FOUND);
+            return null;
         }
         return $restresult;
     }
@@ -87,10 +87,6 @@ class ProductController extends FOSRestController
     public function addAction($productname, $category, $userid)
     {
         $res = $this->getAllAction($userid);
-        if (strcmp(json_encode($res),"there are no products exist") == 0)
-        {
-            $res = null;
-        }
         if (empty($res))
         {
             $em = $this->getDoctrine()->getManager();
