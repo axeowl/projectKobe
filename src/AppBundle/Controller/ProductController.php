@@ -31,10 +31,7 @@ class ProductController extends FOSRestController
         }
         return $restresult;
     }
-
-    /**
-     * @Rest\Get("/getproduct{id}")
-     */
+    
     public function getAll($id)
     {
         $em = $this->getDoctrine()->getManager();
@@ -99,7 +96,7 @@ class ProductController extends FOSRestController
      */
     public function addAction($productname, $category, $userid)
     {
-        $res = $this->getAllAction($userid);
+        $res = $this->getAll($userid);
         if (empty($res))
         {
             $em = $this->getDoctrine()->getManager();
