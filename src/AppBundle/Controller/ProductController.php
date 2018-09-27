@@ -33,6 +33,19 @@ class ProductController extends FOSRestController
     }
 
     /**
+     * @Rest\Get("/getproduct{id}")
+     */
+    public function getAll($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $restresult = $em->getRepository(Product::class)->getAll($id);
+        if ($restresult == null) {
+            return null;
+        }
+        return $restresult;
+    }
+
+    /**
      * @Rest\Get("/getpurchasedproduct{id}")
      */
     public function getAllPurchasedAction($id)

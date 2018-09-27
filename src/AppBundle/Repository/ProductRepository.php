@@ -48,6 +48,14 @@ class ProductRepository extends EntityRepository
         return $stmt->fetchAll();
     }
 
+    public function getAll($id)
+    {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = "SELECT * from product, user, user_has_product WHERE user_has_product.user_iduser = user.iduser AND user_has_product.product_idproduct = product.idproduct AND user.iduser = $id GROUP BY product.productName";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
     public function getAllPurchasedProduct($id)
     {
         $conn = $this->getEntityManager()->getConnection();
