@@ -117,7 +117,7 @@ class Product
         return $this->categorycategory;
     }
 
-    public function setCategorycategory(Category $categorycategory)
+    public function setCategorycategory($categorycategory)
     {
         $this->categorycategory = $categorycategory;
 

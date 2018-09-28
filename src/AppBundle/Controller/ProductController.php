@@ -31,7 +31,7 @@ class ProductController extends FOSRestController
         }
         return $restresult;
     }
-    
+
     public function getAll($id)
     {
         $em = $this->getDoctrine()->getManager();

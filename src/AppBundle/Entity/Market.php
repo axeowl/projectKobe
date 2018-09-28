@@ -28,6 +28,20 @@ class Market
      */
     private $name;
 
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="lat", type="float", precision=10, scale=0, nullable=false)
+     */
+    private $lat;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="lon", type="float", precision=10, scale=0, nullable=false)
+     */
+    private $lon;
+
     public function getUuid()
     {
         return $this->uuid;
@@ -41,6 +55,30 @@ class Market
     public function setName(string $name)
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getLat()
+    {
+        return $this->lat;
+    }
+
+    public function setLat(float $lat)
+    {
+        $this->lat = $lat;
+
+        return $this;
+    }
+
+    public function getLon()
+    {
+        return $this->lon;
+    }
+
+    public function setLon(float $lon)
+    {
+        $this->lon = $lon;
 
         return $this;
     }
